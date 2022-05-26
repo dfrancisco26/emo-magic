@@ -1,16 +1,37 @@
+import { getWorkshops, deleteParticipant } from "./fetch-utils.js";
+
 const workshopsEl = document.getElementById('workshops');
 
-export function renderWorkshop() {
-    const wsDiv = document.createElement('div');
-    const title = document.createElement('h2');
-    const description = document.createElement('p');
-    const partList = document.createElement('ul');
-    const partEl = document.createElement('li');
+export async function renderWorkshop() {
 
-    title.textContent = 'Tearbending';
-    description.textContent = 'Like waterbending, but saltier!';
-    partEl.textContent = 'Bufo Contact Info: Wiggle your fingers while thinking of toads.';
-    partList.append(partEl);
-    wsDiv.append(title, description, partList);
-    workshopsEl.append(wsDiv);
+    workshopsEl.textContent = '';
+
+    const workshops = await getWorkshops();
+    for (let workshop of workshops) {
+        const wsDiv = document.createElement('div');
+        const title = document.createElement('h2');
+        const description = document.createElement('p');
+        const partList = document.createElement('ul');
+        title.textContent = workshop.name;
+        description.textContent = workshop.description;
+        workshopsEl.append(wsDiv);
+        wsDiv.append(title, description, partList);
+        
+        for (let participant of workshop.participants) {
+            const partEl = document.createElement('li');
+            const delButton = document.createElement('button');
+            const delLabel = document.createElement('label');
+            partEl.textContent = `${participant.name} Contact info: ${participant.contact}gi`;
+            delLabel.textContent = 'Delete';
+            partList.append(partEl);
+            partEl.append(delButton);
+            delButton.append(delLabel);
+            delButton.addEventListener('click', async () => {
+                await deleteParticipant(participant.id);
+                renderWorkshop();
+            });
+        }
+
+    }
 } 
+

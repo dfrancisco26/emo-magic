@@ -53,3 +53,8 @@ export async function getWorkshops() {
         return checkError(response);
     }
 }
+
+export async function deleteParticipant(id) {
+    const response = await client.from('participants').delete().match({ id: id}).single();
+    return checkError(response);
+}
