@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://edanuxzgkcleuccdeakc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkYW51eHpna2NsZXVjY2RlYWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTIzNjg3OTMsImV4cCI6MTk2Nzk0NDc5M30.HH23nUpy7jCA4AgRRgpIk8M-fwc5zqvBLuE1Muk_lps';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -15,7 +15,7 @@ export function checkAuth() {
 
 export function redirectIfLoggedIn() {
     if (getUser()) {
-        location.replace('./other-page');
+        location.replace('./Workshops/index.html');
     }
 }
 
@@ -37,6 +37,19 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}
+
+
+export async function getWorkshops() {
+    const response = await client.from('workshops').select('*, participants(*)');
+    if (response.data) {
+        console.log(response.data);
+        return response.data;
+        
+    } else {
+        return checkError(response);
+    }
+}
