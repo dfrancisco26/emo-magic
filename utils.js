@@ -16,17 +16,20 @@ export async function renderWorkshop() {
 
         const title = document.createElement('h2');
         const description = document.createElement('p');
+        const participantLabel = document.createElement('p');
         const partList = document.createElement('ul');
 
         title.textContent = workshop.name;
         description.textContent = workshop.description;
+        participantLabel.textContent = 'Participants:';
 
         workshopsEl.append(wsDiv);
-        wsDiv.append(img, title, description, partList);
+        wsDiv.append(img, title, description, participantLabel, partList);
         
         for (let participant of workshop.participants) {
             const partEl = document.createElement('li');
             const delButton = document.createElement('button');
+            delButton.classList.add('delete-button');
             const delLabel = document.createElement('label');
 
             partEl.textContent = `${participant.name} Contact info: ${participant.contact}`;
@@ -35,7 +38,7 @@ export async function renderWorkshop() {
             partList.append(partEl);
             partEl.append(delButton);
             delButton.append(delLabel);
-            
+
             delButton.addEventListener('click', async () => {
                 await deleteParticipant(participant.id);
                 renderWorkshop();

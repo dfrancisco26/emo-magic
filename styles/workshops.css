@@ -40,4 +40,10 @@ img {
 li {
     background-color: rgb(104, 177, 135);
     font-size: 14px;
+    border: 2px solid seagreen;
 }
+
+.delete-button {
+    margin-left: 12px;
+}
+
