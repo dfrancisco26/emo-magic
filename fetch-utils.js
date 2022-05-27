@@ -58,3 +58,11 @@ export async function deleteParticipant(id) {
     const response = await client.from('participants').delete().match({ id: id}).single();
     return checkError(response);
 }
+
+export async function createParticipant(participant) {
+    const response = await client.from('participants').insert(participant);
+    if (response.data) {
+        return response.data;
+    }
+    return checkError(response);
+}
