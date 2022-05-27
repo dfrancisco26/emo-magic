@@ -19,7 +19,7 @@ test('time to test a function', (expect) => {
 });
 
 test ('workshop render', (expect) => {
-    const expected = '<div class="workshop"><img src="../assets/cry.jpg"><h2>Tearbending</h2><p>Like waterbending, but saltier!</p><ul><li>Bufo <br>Contact Info: Wiggle your fingers while thinking of toads.</li></ul></div>'
+    const expected = '<div class="workshop"><img src="../assets/cry.jpg"><h2>Tearbending</h2><p>Like waterbending, but saltier!</p><ul><li>Bufo <br>Contact Info: Wiggle your fingers while thinking of toads.</li></ul></div>';
 
 
     const actual = renderWorkshop();

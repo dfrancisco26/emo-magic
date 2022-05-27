@@ -18,7 +18,7 @@ signUpForm.addEventListener('submit', async (event) => {
     if (user) {
         redirectIfLoggedIn();
     } else {
-        console.error(user);
+//        console.error(user);
     }
 });
 
@@ -29,6 +29,6 @@ signInForm.addEventListener('submit', async (event) => {
     if (user) {
         redirectIfLoggedIn();
     } else {
-        console.error(user);
+//        console.error(user);
     }
 });

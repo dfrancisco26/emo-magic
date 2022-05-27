@@ -1,4 +1,4 @@
-import { createParticipant, getWorkshops } from "../fetch-utils.js";
+import { createParticipant, getWorkshops } from '../fetch-utils.js';
 
 const form = document.getElementById('addForm');
 
